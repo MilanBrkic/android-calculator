@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">Comas Calculator</string>
+    <string-array name="notifications">
+        <item>Ajde bar 2+2</item>
+        <item>Come on! Let's do sam calculations</item>
+        <item>A buraz aj jedan račun samo</item>
+        <item>Click and use our custom app made just for you!</item>
+        <item>Pozovi Milana vidi šta radi</item>
+        <item>Pozovi babu vidi šta radi</item>
+        <item>Haven't seen you in a while. We miss you</item>
+        <item>Oh, I'm sorry. I forgot I only exist when you need something</item>
+        <item>Come on, surely I am better than that boring Huawei calculator</item>
+        <item>I'm the one who calculates!</item>
+        <item>I'm not going to stop your built-in calculator. I'm going to break it!</item>
+        <item>I see dead multiplications</item>
+        <item>Say no to me again! I dare you, I double dare you mothertrucker</item>
+        <item>Well that's enough Instagram for today</item>
+        <item>I am your f...f...irst choice calculator</item>
+        <item>You had me at a press of my icon</item>
+        <item>Why so calculus?</item>
+    </string-array>
 </resources>
