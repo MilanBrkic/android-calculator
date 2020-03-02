@@ -18,8 +18,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn4" />
 
+    <Button
+        android:id="@+id/btn7"
+        android:layout_width="85dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="12dp"
+        android:background="#FFFFFF"
+        android:text="7"
+        android:textColor="#FF80C0"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnClear" />
+
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/text"
         android:layout_width="345dp"
         android:layout_height="100dp"
         android:layout_marginTop="72dp"
@@ -34,18 +46,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn7"
-        android:layout_width="85dp"
-        android:layout_height="71dp"
-        android:layout_marginStart="12dp"
-        android:background="#FFFFFF"
-        android:text="7"
-        android:textColor="#FF80C0"
-        android:textSize="36sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnClear" />
-
-    <Button
         android:id="@+id/btn4"
         android:layout_width="85dp"
         android:layout_height="71dp"
@@ -58,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btn7" />
 
     <Button
-        android:id="@+id/btnZero"
+        android:id="@+id/btn0"
         android:layout_width="170dp"
         android:layout_height="71dp"
         android:layout_marginStart="12dp"
@@ -101,7 +101,7 @@
         android:text=","
         android:textColor="#FF80C0"
         android:textSize="36sp"
-        app:layout_constraintStart_toEndOf="@+id/btnZero"
+        app:layout_constraintStart_toEndOf="@+id/btn0"
         app:layout_constraintTop_toBottomOf="@+id/btn3" />
 
     <Button
