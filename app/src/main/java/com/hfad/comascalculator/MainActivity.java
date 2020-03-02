@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener numListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            text.setText(String.valueOf(v.getId()));
+            text.setText("1");
         }
     };
 
