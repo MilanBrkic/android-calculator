@@ -1,0 +1,2 @@
+rootProject.name='Comas Calculator'
+include ':app'
