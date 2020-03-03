@@ -29,10 +29,18 @@ public class MainActivity extends AppCompatActivity {
     private Button[] numbers = new Button[11];
     private int firstNum;
     private int secondNum;
+
+
+    private boolean isDouble = false;
+    private double firstNumD;
+    private double secondNumD;
+
     private char operation ='#';
     Button[] operations;
     final int PINK = 0xFFFF80C0;
     final int YELLOW = 0xFFFFEB3B;
+    boolean clear = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         text = (TextView) findViewById(R.id.text);
         initalize();
-
     }
 
     private void initalize(){
@@ -55,13 +62,59 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener equalsOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(operation!='#'){
-                    if(!text.getText().toString().contains(".")){
+                if(operation!='#') {
+                    int result;
+                    double resultD;
+
+                    if (isDouble) {
+                        secondNumD = Double.parseDouble(String.valueOf(text.getText()));
+
+                        switch (operation) {
+                            case '+':
+                                resultD = firstNumD + secondNumD;
+                                break;
+                            case '−':
+                                resultD = firstNumD - secondNumD;
+                                break;
+                            case 'x':
+                                resultD = firstNumD * secondNumD;
+                                break;
+                            case '÷':
+                                resultD = firstNumD / secondNumD;
+                                break;
+                            default:
+                                resultD = 000;
+                                break;
+                        }
+
+                        text.setText(String.valueOf(resultD));
+                        firstNumD = Double.parseDouble(String.valueOf(text.getText()));
+
+                    }
+                    else {
                         secondNum = Integer.parseInt(String.valueOf(text.getText()));
-                        text.setText(String.valueOf(firstNum) + String.valueOf(operation) + String.valueOf(secondNum));
-                        revertColors();
+
+                        switch (operation) {
+                            case '+':
+                                result = firstNum + secondNum;
+                                break;
+                            case '−':
+                                result = firstNum - secondNum;
+                                break;
+                            case 'x':
+                                result = firstNum * secondNum;
+                                break;
+                            default:
+                                result = 000;
+                                break;
+                        }
+
+                        text.setText(String.valueOf(result));
+                        firstNum = Integer.parseInt(String.valueOf(text.getText()));
                     }
 
+                    revertColors();
+                    clear = true;
                 }
             }
         };
@@ -84,20 +137,31 @@ public class MainActivity extends AppCompatActivity {
                 Button btn = (Button) v;
                 if(text.getText()!=""){
                     operation =btn.getText().charAt(0);
-                    if(!text.getText().toString().contains(".")){
+                    if(text.getText().toString().contains(".") || operation=='÷'){
+                        isDouble = true;
+                    }
+                    else{
+                        isDouble = false;
+                    }
+
+                    if(isDouble){
+                        firstNumD = Double.parseDouble(String.valueOf(text.getText()));
+                    }
+                    else{
                         firstNum = Integer.parseInt(String.valueOf(text.getText()));
                     }
+                    clear = true;
                 }
                 btn.setTextColor(YELLOW);
                 btn.setBackgroundColor(PINK);
             }
         };
 
-        operations = new Button[3];//witout percent and dived
+        operations = new Button[4];//witout percent and dived
         operations[0] = (Button) findViewById(R.id.btnMinus);
         operations[1] = (Button) findViewById(R.id.btnPlus);
         operations[2] = (Button) findViewById(R.id.btnMulti);
-//        operations[3] = (Button) findViewById(R.id.btnDived);
+        operations[3] = (Button) findViewById(R.id.btnDived);
 //        operations[4] = (Button) findViewById(R.id.btnPercent);
         for(int i = 0;i<operations.length;i++){
             operations[i].setOnClickListener(operationOnClickListener);
@@ -138,8 +202,9 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener numListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(operation!='#'){
+                if(clear){
                     text.setText("");
+                    clear = false;
                 }
 
                 Button btn = (Button) v;
@@ -164,8 +229,6 @@ public class MainActivity extends AppCompatActivity {
 
         percent.setOnClickListener(notfListener);
     }
-
-
 
     private void notf(){
         Context context = getApplicationContext();
