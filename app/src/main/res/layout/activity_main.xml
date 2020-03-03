@@ -230,9 +230,9 @@
         android:layout_marginTop="184dp"
         android:background="#E3E3E3"
         android:shadowColor="#FFFFFF"
-        android:text="%"
+        android:text="DO NOT CLICK HERE"
         android:textColor="#FF80C0"
-        android:textSize="36sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/btnClear"
         app:layout_constraintTop_toTopOf="parent" />
 

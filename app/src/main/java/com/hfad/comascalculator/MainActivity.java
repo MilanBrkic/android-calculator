@@ -1,13 +1,27 @@
 package com.hfad.comascalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.net.wifi.p2p.WifiP2pManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -34,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         initializeClear();
         initializeOperations();
         initializeEquals();
+        notification();
     }
 
     private void initializeEquals(){
@@ -137,8 +152,64 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void notification(){
+        View.OnClickListener notfListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                notf();
+            }
+        };
+
+        Button percent = (Button) findViewById(R.id.btnPercent);
+
+        percent.setOnClickListener(notfListener);
+    }
 
 
 
+    private void notf(){
+        Context context = getApplicationContext();
 
+        displayToast(context);
+
+        Resources res = getResources();
+        String[] textNotifications = res.getStringArray(R.array.notifications);
+
+        final NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+        builder.setSmallIcon(R.mipmap.ic_launcher_round);
+        builder.setContentTitle("Comas Calculator");
+        builder.setContentText(textNotifications[generateRandomNumber(textNotifications.length)]);
+        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+
+
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+
+                // Add as notification
+                NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                manager.notify(0, builder.build());
+            }
+        },60*1000);
+
+
+    }
+
+    private void displayToast(Context context){
+        CharSequence text = "You'll receive a notification in one minute!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+    private int generateRandomNumber(int len){
+        Random rand = new Random();
+        return rand.nextInt(len);
+    }
 }
